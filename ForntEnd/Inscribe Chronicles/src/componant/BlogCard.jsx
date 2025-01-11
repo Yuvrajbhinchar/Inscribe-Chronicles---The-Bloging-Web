@@ -2,7 +2,8 @@ import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ForumIcon from '@mui/icons-material/Forum';
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
-import BookmarkRemoveOutlinedIcon from '@mui/icons-material/BookmarkRemoveOutlined';
+import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import blogLogo from "../assets/blog-s-logo.avif";
 import Aot from "../assets/Aot.jpeg";
@@ -43,7 +44,7 @@ function BlogCard() {
             </div>
             <div className='flex justify-end w-2/5'>
                 <div className='text-xs text-[#6B6B6B]'><RemoveCircleOutlineOutlinedIcon fontSize='small'/></div>
-                <div className='mx-3 text-xs text-[#6B6B6B]'><BookmarkRemoveOutlinedIcon fontSize='small'/></div>
+                <div className='mx-3 text-xs text-[#6B6B6B]'><BookmarkAddOutlinedIcon fontSize='small'/></div>
                 <div className='text-xs text-[#6B6B6B]'><MoreHorizOutlinedIcon fontSize='small'/></div>
             </div>
         </div>
