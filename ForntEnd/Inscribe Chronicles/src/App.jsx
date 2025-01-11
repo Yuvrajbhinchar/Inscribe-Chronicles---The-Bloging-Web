@@ -1,11 +1,12 @@
-import './App.css'
+import './index.css'
+import BlogCard from './componant/BlogCard'
 
 function App() {
   
 
   return (
     <>
-      
+      <BlogCard/>
     </>
   )
 }
