@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Optional;
 
 @Service
 
@@ -23,7 +22,7 @@ public class UserService {
 
     @GetMapping("/username")
     public Users getUser(String username){
-         Optional<Users> user =  userRepository.findByusername(username);
-         return user.orElse(null);
+         Users user =  userRepository.findByusername(username);
+         return user;
     }
 }
