@@ -3,6 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { TextField, IconButton, InputAdornment, Button } from '@mui/material';
+import axios from "axios";
 
 const LandingPage = () => {
     const [showSignup, setShowSignup] = useState(false);
@@ -64,11 +65,23 @@ const LandingPage = () => {
         return Object.keys(errors).length === 0;
       };
 
-      const handleSubmit = (e) => {
+      //handle form ------>
+      const handleSubmit = async(e) => {
         e.preventDefault();
-        if (validateForm()) {
-          setOtpFormVisible(true);
-        }
+        // if (validateForm()) {
+        //   setOtpFormVisible(true);
+
+        // }
+        try{
+        const response = await axios.post("api/user",formData,{
+            headers:{
+                "Content-Type" : "application/json",
+            },
+        });
+        console.log("Success:", response.data);
+    }catch(error){
+        console.error("Error occurred:", error);
+    }
       };
     
       const handleInputChange = (e) => {
