@@ -2,6 +2,7 @@ package com.inscribechronicles.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +21,8 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless sessions
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()// Protect all other endpoints
+                        .requestMatchers(HttpMethod.POST,"/signup/**").permitAll()
+                        .anyRequest().authenticated()// Protect all other endpoints
                 );
 
 
