@@ -2,8 +2,10 @@ package com.inscribechronicles.Util;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +13,9 @@ import java.util.Map;
 @Component
 public class JwtUtil {
 
-    private static final byte[] SECRET_KEY = new byte[32];
+    @Value("${jwt.secret}")
+    private String SECRET_KEY;
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 hours
-
-    static {
-        new java.security.SecureRandom().nextBytes(SECRET_KEY);
-    }
 
 
     public String generateToken(String username){
@@ -34,7 +33,7 @@ public class JwtUtil {
     }
 
     public String extractUsername(String token){
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJwt(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
     }
     private boolean isTokenExpired(String token) {
         Date expiration = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getExpiration();

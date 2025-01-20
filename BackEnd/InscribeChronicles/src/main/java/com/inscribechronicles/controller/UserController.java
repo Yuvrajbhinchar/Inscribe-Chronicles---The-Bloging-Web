@@ -33,23 +33,8 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody Users user){
         Users users = userService.saveUser(user);
-        String jwt  =  jwtUtil.generateToken(users.getUsername());
-        System.out.println(jwt);
-        System.out.println(users);
-        return ResponseEntity.ok(Map.of("user", users, "JWT",jwt));
+        return ResponseEntity.ok(Map.of("user", users));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Users users){
-        try{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUsername(), users.getPassword()));
-          UserDetails userDetails = userDetailsService.loadUserByUsername(users.getUsername());
-        String jwt  =  jwtUtil.generateToken(userDetails.getUsername());
-            System.out.println(jwt);
-            return ResponseEntity.ok(Map.of("user", users , "JWT" ,jwt));
-        } catch (AuthenticationException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }
