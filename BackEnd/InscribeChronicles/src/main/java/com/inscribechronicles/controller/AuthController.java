@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -35,7 +37,7 @@ public class AuthController {
         // Set JWT token in cookie
         response.addHeader("Authorization", "Bearer " + jwt);
 
-        return ResponseEntity.ok("Logged in successfully");
+        return ResponseEntity.ok(Map.of("JWT",jwt));
     }
 
     // Logout: Clear JWT token (if using cookies, you would clear the cookie)
