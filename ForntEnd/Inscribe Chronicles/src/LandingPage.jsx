@@ -55,6 +55,10 @@ const LandingPage = () => {
         setShowSignup(false);
         setShowSignIN(false);
     }
+   
+    const SignInWithEmailClick = ()=>{
+      setSignInWithEmail(true);
+  }
 
     const validateSignUpForm = () => {
         const errors = {};
@@ -77,34 +81,46 @@ const LandingPage = () => {
       }
 
       //handle form ------>
-      const handleSubmit = async(e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
-        // if (validateForm()) {
-        //   setOtpFormVisible(true);
-
-        // }
-        if(validateSignUpForm()){
-
-        try{
-        const response = await axios.post("api/user",formData,{
-            headers:{
-                "Content-Type" : "application/json",
-            },
-        });
-        console.log("Success:", response.data);
-    }catch(error){
-        console.error("Error occurred:", error);
-    }}
+      
+        if (validateSignUpForm()) {
+          try {
+            const response = await axios.post("/api/signup", formData, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            console.log("Success:", response.data);
+          } catch (error) {
+            console.error("Error occurred:", error.response?.data || error.message);
+          } finally {
+            console.log("FormData:", formData);
+          }
+        }
       };
+      
     
-      const handleInputChange = (e) => {
+      const handleInputChange = async(e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
       };
 
-      const handleSigninWithEmail = () =>{
+      const handleSigninWithEmail = async(e) =>{
+        e.preventDefault();
           if(validateSignInForm()){
-            
+            try{
+              const response = await axios.post("/api/auth/login",formData,{
+                headers:{
+                  "Content-Type" : "application/json",
+                }
+                
+              })
+              console.log("Success:", response.data);
+            }
+            catch(error){
+                console.error("Error occurred", error);
+            }
           }
       }
 
@@ -206,11 +222,14 @@ const LandingPage = () => {
                                 />
                                 Sign in with X
                             </button>
-                            <button className="flex items-center justify-center border rounded-full py-2 px-3 sm:px-4 w-full text-sm sm:text-base">
+                            <button className="flex items-center justify-center border rounded-full py-2 px-3 sm:px-4 w-full text-sm sm:text-base"
+                             onClick={SignInWithEmailClick}
+                            >
                                 <img
                                     src="https://img.icons8.com/ios-filled/24/email.png"
                                     alt="Email"
                                     className="mr-2"
+                                   
                                 />
                                 Sign in with Email
                             </button>
@@ -359,7 +378,7 @@ const LandingPage = () => {
                         <CloseIcon className="text-gray-500 hover:text-black cursor-pointer" />
                       </button>
                     </div>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSigninWithEmail} className="space-y-4">
                         <TextField
                           fullWidth
                           label="Email"
@@ -394,6 +413,9 @@ const LandingPage = () => {
                             ),
                           }}
                         />
+                         <Button fullWidth variant="contained" color="primary" type="submit">
+                          Submit
+                        </Button>
                         </form>
 
                     </div>

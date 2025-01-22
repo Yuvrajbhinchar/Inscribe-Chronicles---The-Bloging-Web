@@ -32,6 +32,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody Users user){
+        System.out.println("INSIDE SIGNUP CONTROLLER");
         Users users = userService.saveUser(user);
         return ResponseEntity.ok(Map.of("user", users));
     }

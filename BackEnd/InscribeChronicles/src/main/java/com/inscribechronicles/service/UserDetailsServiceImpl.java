@@ -24,7 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     .roles("USER") // You can customize roles here
                     .build();
         }
-        throw new UsernameNotFoundException("User not found with username: " + username);
-    }
+        throw new UsernameNotFoundException("User not found with username: " + username);    }
 }
 
