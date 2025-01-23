@@ -28,7 +28,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> formData, HttpServletResponse response) {
         String username = formData.get("email");
+        if(username == null){
+            username = formData.get("username");
+        }
         String password = formData.get("password");
+        System.out.println("Inside login controller " + username + "  " + password);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
         );

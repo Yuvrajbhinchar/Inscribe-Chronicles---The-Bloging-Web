@@ -86,7 +86,7 @@ const LandingPage = () => {
       
         if (validateSignUpForm()) {
           try {
-            const response = await axios.post("/api/signup", formData, {
+            const response = await axios.post("/api/auth/signup", formData, {
               headers: {
                 "Content-Type": "application/json",
               },
@@ -117,6 +117,9 @@ const LandingPage = () => {
                 
               })
               console.log("Success:", response.data);
+              const JwtToken = response.data.JWT;
+              localStorage.setItem("JWT", JwtToken);
+              console.log(localStorage.getItem("JWT"))
             }
             catch(error){
                 console.error("Error occurred", error);

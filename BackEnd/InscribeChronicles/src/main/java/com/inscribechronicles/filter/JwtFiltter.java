@@ -28,8 +28,9 @@ public class JwtFiltter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
+        System.out.println("Inside Jwt filter");
         // Skip filter for public endpoints
-        if (requestURI.equals("/auth/login") || requestURI.equals("/signup")) {
+        if (requestURI.equals("/auth/login") || requestURI.equals("/auth/signup")) {
             filterChain.doFilter(request, response);
             return;
         }

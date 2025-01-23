@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document
-public class Users {
+public class User {
     @Id
     private String id;
     private String username;
