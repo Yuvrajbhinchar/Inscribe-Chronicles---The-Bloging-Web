@@ -55,8 +55,8 @@ function Login({ handleCloseModal }) {
           password: "",
         });
         const JwtToken = response.data.JWT;
-        localStorage.setItem("JWT", JwtToken);
-        console.log(localStorage.getItem("JWT"));
+        localStorage.setItem("Inscribe_Barrer_Token", JwtToken);
+        console.log(localStorage.getItem("Inscribe_Barrer_Token"));
       } catch (error) {
         console.error("Error occurred", error);
       }

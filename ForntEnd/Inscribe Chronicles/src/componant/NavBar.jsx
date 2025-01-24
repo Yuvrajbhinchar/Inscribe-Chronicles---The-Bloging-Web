@@ -4,6 +4,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const Navbar = () => {
+  const handleLogOut = () => {
+    localStorage.removeItem("Inscribe_Barrer_Token");
+    window.location.reload();
+  }
   return (
     <nav className="flex items-center justify-between px-4 py-2 bg-white shadow-md">
       {/* Logo */}
@@ -30,7 +34,7 @@ const Navbar = () => {
         {/* Notification Icon */}
         <NotificationsIcon className="text-gray-700" />
         {/* User Avatar */}
-        <div className="h-8 w-8 rounded-full bg-pink-600 text-white flex items-center justify-center font-bold">
+        <div className="h-8 w-8 rounded-full bg-pink-600 text-white flex items-center justify-center font-bold" onClick={handleLogOut}>
           Y
         </div>
       </div>

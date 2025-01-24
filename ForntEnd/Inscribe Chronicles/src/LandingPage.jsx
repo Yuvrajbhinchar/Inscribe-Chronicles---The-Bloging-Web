@@ -3,11 +3,26 @@ import SignUp from './componant/SignUp';
 import Login from './componant/Login';
 import Registration from './componant/Registration';
 import SignInPage from './componant/SignInPage';
+import { useAuth } from './context/AuthContext';
+import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+
 
 const LandingPage = () => {
   const [activeModal, setActiveModal] = useState(null); // Manages which modal to show
 
   const handleCloseModal = () => setActiveModal(null); // Closes any active modal
+  const isAuth = useAuth();
+
+  useEffect(() => {
+    // If the user is authenticated, redirect them to the home page
+    if (isAuth) {
+      // We immediately redirect to the home page to prevent landing page from showing
+    }
+  }, [isAuth]);
+
+  // If authenticated, redirect to home page automatically
+  if (isAuth) return <Navigate to="/home" />;
 
   return (
     <div className="bg-gray-100 w-full h-screen">
