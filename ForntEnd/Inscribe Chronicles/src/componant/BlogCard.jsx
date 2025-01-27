@@ -7,7 +7,7 @@ import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import blogLogo from "../assets/blog-s-logo.avif";
 import Aot from "../assets/Aot.jpeg";
-function BlogCard() {
+function BlogCard({title, content, date,likes,comments}) {
   return (
     
     // Main Div
@@ -24,9 +24,9 @@ function BlogCard() {
         {/* Blog Content */}
         <div className='flex justify-between mx-5'>
         <div className='w-2/3'>
-            <h1 className='my-1 text-2xl font-bold'>What Makes me Love Attack Titan
+            <h1 className='my-1 text-2xl font-bold'>{title}
             </h1>
-            <p className='text-[#6B6B6B] mt-2'>Attack On Titan is very likely (In my opinion) one of the best examples of extraordinary writing within the anime genre and even outside of anime</p>
+            <p className='text-[#6B6B6B] mt-2'>{content}</p>
         </div>
          {/* Blog Image */}
          <div className='w-32 h-32 object-fill'><img src={Aot} className='w-full h-full'/></div>
@@ -36,9 +36,9 @@ function BlogCard() {
         <div className='flex justify-between w-2/3 ml-5'>
             <div className='flex justify-start w-3/5'> 
             <div className='text-xs text-yellow-400'><StarIcon fontSize='small'/></div>
-            <div className='text-sm mx-3 text-[#6B6B6B]'>Jan 10,2025</div>
-            <div className='text-xs mr-3 text-[#6B6B6B]'><FavoriteIcon fontSize='small'/></div>
-            <div className='text-xs text-[#6B6B6B]'><ForumIcon fontSize='small'/></div>
+            <div className='text-sm mx-3 text-[#6B6B6B]'>{date}</div>
+            <div className='text-xs mr-3 text-[#6B6B6B]'><FavoriteIcon fontSize='small'/>{likes}</div>
+            <div className='text-xs text-[#6B6B6B]'><ForumIcon fontSize='small'/>{comments}</div>
             
             
             </div>

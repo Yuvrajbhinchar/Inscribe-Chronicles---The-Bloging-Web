@@ -4,8 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import LandingPage from './LandingPage';
 import PrivateRoute from './componant/PrivateRoute';
 import AuthenticatedLayout from './componant/AuthenticateLayout';
-import SingleBlogCard from './componant/SingleBlogCard';
-import BlogCard from './componant/BlogCard';
+import Home from './componant/Home';
 
 function App() {
   return (
@@ -21,8 +20,7 @@ function App() {
             element={
               <PrivateRoute>
                 <AuthenticatedLayout>
-                  <SingleBlogCard />
-                  <BlogCard />
+                 <Home />
                 </AuthenticatedLayout>
               </PrivateRoute>
             }

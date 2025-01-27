@@ -57,6 +57,7 @@ function Login({ handleCloseModal }) {
         const JwtToken = response.data.JWT;
         localStorage.setItem("Inscribe_Barrer_Token", JwtToken);
         console.log(localStorage.getItem("Inscribe_Barrer_Token"));
+        window.location.reload();
       } catch (error) {
         console.error("Error occurred", error);
       }
@@ -79,7 +80,7 @@ function Login({ handleCloseModal }) {
             fullWidth
             label="Email"
             name="email"
-            type="email"
+            type="text"
             variant="outlined"
             value={formData.email}
             onChange={handleInputChange}

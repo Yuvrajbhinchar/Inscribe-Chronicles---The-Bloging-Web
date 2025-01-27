@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 
 
 const LandingPage = () => {
+  console.log("Landing Page");
   const [activeModal, setActiveModal] = useState(null); // Manages which modal to show
 
   const handleCloseModal = () => setActiveModal(null); // Closes any active modal

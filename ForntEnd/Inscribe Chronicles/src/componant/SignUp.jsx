@@ -53,6 +53,10 @@ function SignUp({handleCloseModal}) {
                 confirmPassword: "",
                 });
             console.log("Success:", response.data);
+            const JwtToken = response.data.JWT;
+            console.log("JWT:", JwtToken);
+           localStorage.setItem("Inscribe_Barrer_Token", JwtToken);
+           window.location.reload();
           } catch (error) {
             console.error("Error occurred:", error.response?.data || error.message);
           } finally {
