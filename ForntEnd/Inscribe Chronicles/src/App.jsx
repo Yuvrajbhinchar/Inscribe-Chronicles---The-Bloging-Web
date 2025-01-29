@@ -5,6 +5,7 @@ import LandingPage from './LandingPage';
 import PrivateRoute from './componant/PrivateRoute';
 import AuthenticatedLayout from './componant/AuthenticateLayout';
 import Home from './componant/Home';
+import SingleBlog from './componant/SingleBlogCard';
 
 function App() {
   return (
@@ -24,6 +25,14 @@ function App() {
                 </AuthenticatedLayout>
               </PrivateRoute>
             }
+          />
+          <Route path="/singleBlog" element={
+            <PrivateRoute>
+              <AuthenticatedLayout>
+                <SingleBlog />
+              </AuthenticatedLayout>
+            </PrivateRoute>
+          }
           />
 
           {/* Redirect unauthenticated users to Landing Page */}

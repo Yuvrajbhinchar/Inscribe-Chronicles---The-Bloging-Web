@@ -10,4 +10,5 @@ public class InscribeChroniclesApplication {
 		SpringApplication.run(InscribeChroniclesApplication.class, args);
 	}
 
+
 }
