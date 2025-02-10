@@ -17,34 +17,12 @@ public class Post {
     private String summary;
     private List<String> tags;
     private int commentsCount;
-    private List<Clap> claps;
     private int views;
     private String status;
     private boolean isFeatured;
     private boolean premium;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    public static class Clap {
-        private String userId;
-        private int count;
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-        public int getCount() {
-            return count;
-        }
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-    }
 
     public String getId() {
         return id;
@@ -100,14 +78,6 @@ public class Post {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
-    }
-
-    public List<Clap> getClaps() {
-        return claps;
-    }
-
-    public void setClaps(List<Clap> claps) {
-        this.claps = claps;
     }
 
     public int getCommentsCount() {

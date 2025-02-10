@@ -1,10 +1,12 @@
 import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
+import axios from 'axios';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import HeadphonesOutlinedIcon from '@mui/icons-material/HeadphonesOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import AotImage from "../assets/Aot-Image.webp";
@@ -13,8 +15,28 @@ import { useLocation } from 'react-router-dom';
 const SingleBlogCard = () => {
 
     const location = useLocation();
-    const post = location.state.post;
+    const post = location.state?.post || {};
     console.log("Post:", post);
+    const token = localStorage.getItem("Inscribe_Barrer_Token");
+    if (!token) {
+        console.error("No token found!");
+        return;
+    }
+    const handleLike = () => {
+        axios.post(`api/post/like?postId=${post.id}`,
+            {},
+            {
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                }
+            }
+
+        )
+        .then((response) => {
+            console.log("Response Data:", response.data);
+        })
+    }
     return (
         // Main Div
         <div className="m-auto w-1/2 mt-1">
@@ -49,7 +71,7 @@ const SingleBlogCard = () => {
             {/* 4 */}
             <div className='flex justify-around w-full h-12 border-b-2 border-t-2'>
                 <div className='flex justify-start w-1/2 mt-2'>
-                    <div className='text-[#6B6B6B] mx-1'><FavoriteBorderIcon fontSize='small'/>{post.views}</div>
+                    <div className='text-[#6B6B6B] mx-1'><FavoriteBorderIcon fontSize='small' onClick = {handleLike}/>{post.likeCount}</div>
                 
                 <div className='text-[#6B6B6B] mx-4'><ModeCommentOutlinedIcon fontSize='small'/>{post.commentsCount}</div>
                 </div>

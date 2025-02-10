@@ -9,6 +9,7 @@ public class PostDto {
     private String title;
     private String slug;
     private String content;
+    private Long likeCount;
     private String summary;
     private List<String> tags;
     private int commentsCount;
@@ -21,6 +22,14 @@ public class PostDto {
 
     public void setId(String id) {
         Id = id;
+    }
+
+    public long getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(long likeCount) {
+        this.likeCount = likeCount;
     }
 
     public String getAuthorName() {

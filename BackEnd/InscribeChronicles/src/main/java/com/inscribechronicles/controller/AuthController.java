@@ -1,6 +1,8 @@
 package com.inscribechronicles.controller;
 
 import com.inscribechronicles.Util.JwtUtil;
+import com.inscribechronicles.entity.User;
+import com.inscribechronicles.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -21,6 +24,9 @@ public class AuthController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -37,8 +43,11 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(username, password)
         );
 
+        User user = userRepository.findByusername(username)
+                .orElseThrow(()-> new RuntimeException("User Not Found"));
+
         // If authentication is successful, generate JWT token
-        String jwt = jwtUtil.generateToken(username);
+        String jwt = jwtUtil.generateToken(username,user.getId());
 
         // Set JWT token in cookie
         response.addHeader("Authorization", "Bearer " + jwt);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PostDtoMapper {
-    public PostDto toPostDto(Post post, User user){
+    public PostDto toPostDto(Post post, User user, long likeCount){
         System.out.println("Inside PostMapper toPostDto");
         PostDto postDto = new PostDto();
         postDto.setId(post.getId());
@@ -17,6 +17,7 @@ public class PostDtoMapper {
         postDto.setSlug(post.getSlug());
         postDto.setContent(post.getContent());
         postDto.setTags(post.getTags());
+        postDto.setLikeCount(likeCount);
         postDto.setViews(post.getViews());
         postDto.setCommentsCount(post.getCommentsCount());
         postDto.setCreatedAt(post.getCreatedAt());

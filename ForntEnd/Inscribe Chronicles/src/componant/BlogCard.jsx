@@ -1,3 +1,4 @@
+import { useState } from "react";
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ForumIcon from '@mui/icons-material/Forum';
@@ -8,6 +9,14 @@ import blogLogo from "../assets/blog-s-logo.avif";
 import Aot from "../assets/Aot.jpeg";
 
 function BlogCard({ post }) {
+  // State to manage dropdown visibility
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  // Function to toggle dropdown visibility
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   return (
     // Main Div
     <div className="w-full md:w-3/5 h-auto border-b-2 p-4">
@@ -50,7 +59,7 @@ function BlogCard({ post }) {
           {/* Icons visible only on larger screens */}
           <div className="hidden md:flex items-center space-x-2 text-xs text-[#6B6B6B]">
             <FavoriteIcon fontSize="small" />
-            <span>{post.views}</span>
+            <span>{post.likeCount}</span>
           </div>
           <div className="hidden md:flex items-center space-x-2 text-xs text-[#6B6B6B]">
             <ForumIcon fontSize="small" />
@@ -58,20 +67,48 @@ function BlogCard({ post }) {
           </div>
         </div>
 
-        {/* MoreHorizOutlinedIcon for smaller screens */}
-        <div className="flex justify-end items-center space-x-3">
-          <div className="md:hidden text-xs text-[#6B6B6B]">
+        {/* Dropdown Menu for smaller screens */}
+        <div className="relative">
+          {/* Three-dot icon */}
+          <div
+            className="md:hidden text-xs text-[#6B6B6B] cursor-pointer"
+            onClick={toggleDropdown}
+          >
             <MoreHorizOutlinedIcon fontSize="small" />
           </div>
 
-          {/* Icons visible only on larger screens */}
-          <div className="hidden md:flex items-center space-x-3">
-            <div className="text-xs text-[#6B6B6B]">
-              <RemoveCircleOutlineOutlinedIcon fontSize="small" />
+          {/* Dropdown Menu */}
+          {showDropdown && (
+            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <div className="p-2">
+                <div className="flex items-center space-x-2 text-xs text-[#6B6B6B] p-2 hover:bg-gray-100 rounded-lg">
+                  <FavoriteIcon fontSize="small" />
+                  <span>{post.views} Likes</span>
+                </div>
+                <div className="flex items-center space-x-2 text-xs text-[#6B6B6B] p-2 hover:bg-gray-100 rounded-lg">
+                  <ForumIcon fontSize="small" />
+                  <span>{post.commentsCount} Comments</span>
+                </div>
+                <div className="flex items-center space-x-2 text-xs text-[#6B6B6B] p-2 hover:bg-gray-100 rounded-lg">
+                  <RemoveCircleOutlineOutlinedIcon fontSize="small" />
+                  <span>Remove</span>
+                </div>
+                <div className="flex items-center space-x-2 text-xs text-[#6B6B6B] p-2 hover:bg-gray-100 rounded-lg">
+                  <BookmarkAddOutlinedIcon fontSize="small" />
+                  <span>Save</span>
+                </div>
+              </div>
             </div>
-            <div className="text-xs text-[#6B6B6B]">
-              <BookmarkAddOutlinedIcon fontSize="small" />
-            </div>
+          )}
+        </div>
+
+        {/* Icons visible only on larger screens */}
+        <div className="hidden md:flex items-center space-x-3">
+          <div className="text-xs text-[#6B6B6B]">
+            <RemoveCircleOutlineOutlinedIcon fontSize="small" />
+          </div>
+          <div className="text-xs text-[#6B6B6B]">
+            <BookmarkAddOutlinedIcon fontSize="small" />
           </div>
         </div>
       </div>

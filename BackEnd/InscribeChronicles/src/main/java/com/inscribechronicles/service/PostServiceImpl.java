@@ -4,6 +4,7 @@ import com.inscribechronicles.dto.PostDto;
 import com.inscribechronicles.entity.Post;
 import com.inscribechronicles.entity.User;
 import com.inscribechronicles.mapper.PostDtoMapper;
+import com.inscribechronicles.repository.LikeRepository;
 import com.inscribechronicles.repository.PostRepository;
 import com.inscribechronicles.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class PostServiceImpl implements PostService{
     private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LikeRepository likeRepository;
 
     @Autowired
     private PostDtoMapper postDtoMapper;
@@ -34,9 +37,18 @@ public class PostServiceImpl implements PostService{
       for(Post post : posts){
           Optional<User> Optinaluser = userRepository.findById(post.getAuthorId());
           User user = Optinaluser.get();
-         postDtos.add( postDtoMapper.toPostDto(post, user));
+         long likeCount =  likeRepository.countByPostId(post.getId());
+         postDtos.add( postDtoMapper.toPostDto(post, user,likeCount));
 
       }
       return postDtos;
+    }
+
+    @Override
+    public List<PostDto> findById(String id) {
+        Optional<Post> post = postRepository.findById(id);
+        long likeCount  = likeRepository.countByPostId(id);
+        PostDto postDto = postDtoMapper.toPostDto(post.get(),null,likeCount);
+        return List.of(postDto);
     }
 }
