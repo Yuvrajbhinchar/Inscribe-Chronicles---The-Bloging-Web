@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import BlogCard from './BlogCard';
+import BlogCard from '../componant/post/BlogCard';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../redux/slices/postSlice';
@@ -20,8 +20,8 @@ const Home = () => {
 
     // Handle navigation to single blog page
     const handleSingleBlog = (post) => {
-        navigate('/singleBlog', { state: { post } });
-    };
+        navigate(`/singleBlog/${post.id}`, { state: { post } });
+    };    
 
     return (
         <div className='w-full h-screen'>

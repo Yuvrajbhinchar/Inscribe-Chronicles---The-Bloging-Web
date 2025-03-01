@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { getToken, isValidToken } from "../utils/auth";
+import { getToken, isValidToken, getAuth } from "../utils/auth";
 
 // Create Auth Context
 const AuthContext = createContext();
@@ -9,13 +9,15 @@ export const useAuth = () => useContext(AuthContext);
 
 // AuthProvider Component
 export const AuthProvider = ({ children }) => {
-  const [isAuth, setIsAuth] = useState(false);
+  const Auth = getAuth();
+  const [isAuth, setIsAuth] = useState(Auth);
 
   useEffect(() => {
     const token = getToken();
     console.log(token);
     if (token && isValidToken(token)) {
       setIsAuth(true);
+      localStorage.setItem('isAuth' , true)
     } else {
       localStorage.removeItem("token");
     }

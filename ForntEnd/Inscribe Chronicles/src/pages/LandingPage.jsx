@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import SignUp from './componant/SignUp';
-import Login from './componant/Login';
-import Registration from './componant/Registration';
-import SignInPage from './componant/SignInPage';
-import { useAuth } from './context/AuthContext';
+import SignUp from '../componant/auth/SignUp';
+import Login from '../componant/auth/Login';
+import Registration from '../componant/auth/Registration';
+import SignInPage from '../componant/auth/SignInPage';
+import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 

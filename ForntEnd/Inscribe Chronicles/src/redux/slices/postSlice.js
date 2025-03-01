@@ -5,7 +5,7 @@ export const fetchPosts = createAsyncThunk('post/fetchPost', async (_, { rejectW
     try {
         const token = localStorage.getItem("Inscribe_Barrer_Token");
         if (!token) throw new Error("No authentication token found");
-
+        
         const response = await axios.post(
             'api/posts/allPosts', 
             {}, 

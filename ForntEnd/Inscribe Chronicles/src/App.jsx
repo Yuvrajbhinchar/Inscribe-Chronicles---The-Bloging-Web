@@ -1,11 +1,14 @@
 import './index.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import LandingPage from './LandingPage';
+import LandingPage from './pages/LandingPage';
 import PrivateRoute from './componant/PrivateRoute';
 import AuthenticatedLayout from './componant/AuthenticateLayout';
-import Home from './componant/Home';
+import Home from './pages/Home';
 import SingleBlog from './componant/SingleBlogCard';
+import WritePost from './componant/post/WritePost';
+
+
 
 function App() {
   return (
@@ -26,14 +29,23 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/singleBlog" element={
+
+          {/* Route for Single Blog Page with postId as a URL parameter */}
+          <Route path="/singleBlog/:postId" element={
             <PrivateRoute>
               <AuthenticatedLayout>
                 <SingleBlog />
               </AuthenticatedLayout>
             </PrivateRoute>
-          }
-          />
+          }/>
+
+          <Route path="/write" element={
+            <PrivateRoute>
+              <AuthenticatedLayout>
+                <WritePost/>
+              </AuthenticatedLayout>
+            </PrivateRoute>
+          } />
 
           {/* Redirect unauthenticated users to Landing Page */}
           <Route path="*" element={<Navigate to="/" />} />

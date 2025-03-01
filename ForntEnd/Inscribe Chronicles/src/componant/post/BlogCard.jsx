@@ -5,12 +5,14 @@ import ForumIcon from '@mui/icons-material/Forum';
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import blogLogo from "../assets/blog-s-logo.avif";
-import Aot from "../assets/Aot.jpeg";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import blogLogo from "../../assets/blog-s-logo.avif";
+import Aot from "../../assets/Aot.jpeg";
 
 function BlogCard({ post }) {
   // State to manage dropdown visibility
   const [showDropdown, setShowDropdown] = useState(false);
+  console.log(post.like +   "like");
 
   // Function to toggle dropdown visibility
   const toggleDropdown = () => {
@@ -57,8 +59,10 @@ function BlogCard({ post }) {
           <div className="text-sm text-[#6B6B6B]">{post.createdAt}</div>
 
           {/* Icons visible only on larger screens */}
-          <div className="hidden md:flex items-center space-x-2 text-xs text-[#6B6B6B]">
-            <FavoriteIcon fontSize="small" />
+          <div className="hidden md:flex items-center space-x-2 text-xs" >
+            {
+              post.like ? <FavoriteIcon fontSize="small" />  : <FavoriteBorderIcon fontSize="small" />
+            }
             <span>{post.likeCount}</span>
           </div>
           <div className="hidden md:flex items-center space-x-2 text-xs text-[#6B6B6B]">
@@ -81,12 +85,12 @@ function BlogCard({ post }) {
           {showDropdown && (
             <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
               <div className="p-2">
-                <div className="flex items-center space-x-2 text-xs text-[#6B6B6B] p-2 hover:bg-gray-100 rounded-lg">
+                <div className="flex items-center space-x-2 text-xs p-2 hover:bg-gray-100 rounded-lg"  >
                   <FavoriteIcon fontSize="small" />
                   <span>{post.views} Likes</span>
                 </div>
                 <div className="flex items-center space-x-2 text-xs text-[#6B6B6B] p-2 hover:bg-gray-100 rounded-lg">
-                  <ForumIcon fontSize="small" />
+                  <ForumIcon fontSize="small"  />
                   <span>{post.commentsCount} Comments</span>
                 </div>
                 <div className="flex items-center space-x-2 text-xs text-[#6B6B6B] p-2 hover:bg-gray-100 rounded-lg">
