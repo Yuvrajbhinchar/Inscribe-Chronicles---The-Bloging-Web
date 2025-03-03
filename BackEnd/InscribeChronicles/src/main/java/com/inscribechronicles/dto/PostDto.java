@@ -14,10 +14,23 @@ public class PostDto {
     private List<String> tags;
     private int commentsCount;
     private int views;
+    private boolean isLike;
     private LocalDateTime createdAt;
 
     public String getId() {
         return Id;
+    }
+
+    public void setLikeCount(Long likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
     }
 
     public void setId(String id) {

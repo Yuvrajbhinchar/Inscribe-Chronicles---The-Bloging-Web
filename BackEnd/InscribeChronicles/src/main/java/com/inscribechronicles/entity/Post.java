@@ -1,6 +1,8 @@
 package com.inscribechronicles.entity;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -12,7 +14,7 @@ public class Post {
     private String id;
     private String authorId;
     private String title;
-    private String slug;
+    private String category;
     private String content;
     private String summary;
     private List<String> tags;
@@ -21,7 +23,9 @@ public class Post {
     private String status;
     private boolean isFeatured;
     private boolean premium;
+    @CreatedDate
     private LocalDateTime createdAt;
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     public String getId() {
@@ -48,12 +52,12 @@ public class Post {
         this.title = title;
     }
 
-    public String getSlug() {
-        return slug;
+    public String getCategory() {
+        return category;
     }
 
-    public void setSlug(String slug) {
-        this.slug = slug;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getContent() {

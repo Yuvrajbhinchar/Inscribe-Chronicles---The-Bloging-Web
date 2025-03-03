@@ -1,6 +1,8 @@
 package com.inscribechronicles.service;
 
+import com.inscribechronicles.dto.AddPostDto;
 import com.inscribechronicles.dto.PostDto;
+import com.inscribechronicles.entity.Like;
 import com.inscribechronicles.entity.Post;
 import com.inscribechronicles.entity.User;
 import com.inscribechronicles.mapper.PostDtoMapper;
@@ -38,17 +40,39 @@ public class PostServiceImpl implements PostService{
           Optional<User> Optinaluser = userRepository.findById(post.getAuthorId());
           User user = Optinaluser.get();
          long likeCount =  likeRepository.countByPostId(post.getId());
-         postDtos.add( postDtoMapper.toPostDto(post, user,likeCount));
-
+         Optional<Like> optional = likeRepository.findByPostIdAndUserId(post.getId(), user.getId());
+         if(optional.isPresent()) {
+             postDtos.add(postDtoMapper.toPostDto(post, user, likeCount,true));
+         } else {
+             postDtos.add(postDtoMapper.toPostDto(post,user,likeCount,false));
+         }
       }
       return postDtos;
     }
 
     @Override
     public List<PostDto> findById(String id) {
-        Optional<Post> post = postRepository.findById(id);
+        Post post = postRepository.findById(id).orElseThrow(()-> new RuntimeException("No Post Found"));
+       User user =  userRepository.findById(post.getAuthorId()).orElseThrow(()-> new RuntimeException("NO Author Found"));
         long likeCount  = likeRepository.countByPostId(id);
-        PostDto postDto = postDtoMapper.toPostDto(post.get(),null,likeCount);
-        return List.of(postDto);
+        Optional<Like> optional = likeRepository.findByPostIdAndUserId(post.getId(), user.getId());
+        if(optional.isPresent()) {
+            return List.of(postDtoMapper.toPostDto(post, user, likeCount, true));
+        } else{
+            return List.of(postDtoMapper.toPostDto(post, user, likeCount, false));
+        }
+
+    }
+    @Override
+    public String AddPost(AddPostDto addPostDto) {
+        Post post = new Post();
+        post.setTitle(addPostDto.getTitle());
+        post.setAuthorId(addPostDto.getAuthorId());
+        post.setContent(addPostDto.getContent());
+        post.setCategory(addPostDto.getCategory());
+        post.setSummary(addPostDto.getSummary());
+        post.setTags(addPostDto.getTags());
+        postRepository.save(post);
+        return "Post Upload Succesfully";
     }
 }

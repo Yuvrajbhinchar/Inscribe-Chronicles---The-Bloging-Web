@@ -21,11 +21,15 @@ public class LikeServiceimpl implements LikeService{
     @Override
     public String likePost (String postId, String userId){
         System.out.println("Inside LikeService");
-        Optional<Like> existLike= likeRepository.findByUserIdAndPostId(postId,userId);
+
+        Optional<Like> existLike= likeRepository.findByPostIdAndUserId(postId, userId);
+        System.out.println(existLike  + "         exist like");
         if(existLike.isPresent()){
+            System.out.println("already like");
             likeRepository.delete(existLike.get());
             return "Unlike";
         }else {
+            System.out.println("New like");
             Like like = new Like();
             like.setPostId(postId);
             like.setUserId(userId);
