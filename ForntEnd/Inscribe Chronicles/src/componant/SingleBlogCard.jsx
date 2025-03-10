@@ -21,7 +21,7 @@ const SingleBlogCard = () => {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    
+    console.log("1234566  "+post)
 
     // ✅ Fetch Post Details
     useEffect(() => {
@@ -160,6 +160,7 @@ const SingleBlogCard = () => {
             {/* 📝 Post Content */}
             <div className='mt-8'>
                 <h1 className='text-xl'>{post.title}</h1>
+                <p className='text-base'>{post.content}</p>
             </div>
 
             {/* 💬 Comments & Response Section */}
